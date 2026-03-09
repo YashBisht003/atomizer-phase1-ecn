@@ -1,0 +1,7 @@
+# ECN Spray G and Spray A sources for Phase 1 high-speed imaging
+https://ecn.sandia.gov/gasoline-spray-combustion/target-condition/primary-spray-g-datasets/
+https://ecn.sandia.gov/data/sandia-spray-g-data/
+https://ecn.sandia.gov/data/melbourne-spray-g-data/
+https://ecn.sandia.gov/data/high-speed-movies-at-spray-a/
+https://ecn.sandia.gov/pub-links/sq001/shockwave/
+https://ecn.sandia.gov/data/rayleigh-burst-spray-a/
