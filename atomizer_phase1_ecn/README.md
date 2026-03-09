@@ -15,9 +15,11 @@ This folder gives you a reproducible Phase 1 workflow for:
 - `scripts/download_manifest.py`: downloads all URLs from the manifest.
 - `scripts/export_frames.py`: exports frames from downloaded videos.
 - `scripts/analyze_spray_geometry.py`: computes penetration/cone/area metrics from frames.
+- `scripts/compare_with_reference.py`: computes MAE/RMSE vs ECN Spray G reference curves.
 - `data/raw/`: downloaded files.
 - `data/frames/`: exported frame images.
 - `results/geometry/`: analysis CSV outputs.
+- `results/reference_compare/`: reference comparison outputs.
 
 ## 1) Windows Local (PowerShell)
 
@@ -129,6 +131,15 @@ Create report plots from geometry CSV:
 sbatch scripts/run_geometry_plots_gpu_cpu24.slurm
 ```
 
+Compare against ECN reference curves (MAE/RMSE):
+
+```bash
+sbatch scripts/run_reference_compare_gpu_cpu24.slurm
+```
+
+Default comparison in the Slurm script uses `--include-regex "__avi$"` to avoid
+mixing GIF/MP4 modalities with Spray-G AVI references.
+
 Check logs:
 
 ```bash
@@ -144,6 +155,8 @@ ls -lah results/geometry
 head -n 5 results/geometry/video_summary.csv
 head -n 5 results/geometry/frame_metrics.csv
 ls -lah results/geometry/plots
+ls -lah results/reference_compare
+head -n 10 results/reference_compare/aggregate_summary.csv
 ```
 
 Transfer example from Windows (PowerShell + OpenSSH):
