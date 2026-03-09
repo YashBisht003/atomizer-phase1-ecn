@@ -123,6 +123,12 @@ Run geometry analysis from existing frames:
 sbatch scripts/run_geometry_analysis_gpu_cpu24.slurm
 ```
 
+Create report plots from geometry CSV:
+
+```bash
+sbatch scripts/run_geometry_plots_gpu_cpu24.slurm
+```
+
 Check logs:
 
 ```bash
@@ -137,6 +143,7 @@ Analysis outputs:
 ls -lah results/geometry
 head -n 5 results/geometry/video_summary.csv
 head -n 5 results/geometry/frame_metrics.csv
+ls -lah results/geometry/plots
 ```
 
 Transfer example from Windows (PowerShell + OpenSSH):
