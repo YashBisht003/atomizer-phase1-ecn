@@ -102,6 +102,12 @@ sbatch scripts/run_phase1_gpu_cpu24.slurm
 squeue -u "$USER"
 ```
 
+Resume only frame export (if download already finished):
+
+```bash
+sbatch scripts/run_export_only_gpu_cpu24.slurm
+```
+
 Check logs:
 
 ```bash
