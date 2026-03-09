@@ -84,6 +84,21 @@ python3 scripts/export_frames.py \
   --step 5
 ```
 
+Batch mode (SLURM, `gpu` partition, 24 CPU cores, no memory flag):
+
+```bash
+sbatch scripts/run_phase1_gpu_cpu24.slurm
+squeue -u "$USER"
+```
+
+Check logs:
+
+```bash
+ls -lah logs
+tail -n 100 logs/phase1_<jobid>.out
+tail -n 100 logs/phase1_<jobid>.err
+```
+
 Transfer example from Windows (PowerShell + OpenSSH):
 
 ```powershell
