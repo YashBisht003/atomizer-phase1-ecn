@@ -95,6 +95,13 @@ python3 scripts/export_frames.py \
   --backend imageio
 ```
 
+To re-export cleanly (recommended after script updates):
+
+```bash
+rm -rf data/frames
+mkdir -p data/frames
+```
+
 Batch mode (SLURM, `gpu` partition, 24 CPU cores, no memory flag):
 
 ```bash

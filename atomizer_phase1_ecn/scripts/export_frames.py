@@ -35,6 +35,14 @@ def list_videos(input_dir: Path) -> list[Path]:
     return sorted(files)
 
 
+def output_subdir(output_root: Path, input_root: Path, video: Path) -> Path:
+    """Create per-video output folder; include extension to avoid stem collisions."""
+    rel = video.relative_to(input_root)
+    ext = rel.suffix.lower().lstrip(".")
+    leaf = f"{rel.stem}__{ext}" if ext else rel.stem
+    return output_root / rel.parent / leaf
+
+
 def run_imageio_backend(args: argparse.Namespace, videos: list[Path]) -> int:
     try:
         import imageio.v2 as iio  # type: ignore
@@ -50,8 +58,7 @@ def run_imageio_backend(args: argparse.Namespace, videos: list[Path]) -> int:
 
     print(f"[info] backend=imageio videos queued: {len(videos)}")
     for i, video in enumerate(videos, start=1):
-        rel = video.relative_to(args.input_dir)
-        out_subdir = args.output_dir / rel.with_suffix("")
+        out_subdir = output_subdir(args.output_dir, args.input_dir, video)
         out_subdir.mkdir(parents=True, exist_ok=True)
 
         status = "ok"
@@ -112,8 +119,7 @@ def run_opencv_backend(args: argparse.Namespace, videos: list[Path]) -> int:
 
     print(f"[info] backend=opencv videos queued: {len(videos)}")
     for i, video in enumerate(videos, start=1):
-        rel = video.relative_to(args.input_dir)
-        out_subdir = args.output_dir / rel.with_suffix("")
+        out_subdir = output_subdir(args.output_dir, args.input_dir, video)
         out_subdir.mkdir(parents=True, exist_ok=True)
 
         cap = cv2.VideoCapture(str(video))
