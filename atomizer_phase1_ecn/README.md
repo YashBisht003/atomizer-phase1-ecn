@@ -84,6 +84,17 @@ python3 scripts/export_frames.py \
   --step 5
 ```
 
+If OpenCV crashes on your HPC node, use imageio backend:
+
+```bash
+python3 -m pip install --user imageio imageio-ffmpeg pillow
+python3 scripts/export_frames.py \
+  --input-dir data/raw \
+  --output-dir data/frames \
+  --step 5 \
+  --backend imageio
+```
+
 Batch mode (SLURM, `gpu` partition, 24 CPU cores, no memory flag):
 
 ```bash

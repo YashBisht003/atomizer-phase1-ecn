@@ -29,6 +29,17 @@ fi
 
 mkdir -p logs data/raw data/frames
 
+if ! python - <<'PY'
+import importlib.util
+mods = ["imageio", "imageio_ffmpeg", "PIL"]
+missing = [m for m in mods if importlib.util.find_spec(m) is None]
+if missing:
+    raise SystemExit(1)
+print("frame-export deps are present")
+PY
+  python -m pip install --user imageio imageio-ffmpeg pillow
+fi
+
 python scripts/extract_ecn_links.py \
   --seed-file manifests/seed_pages.txt \
   --out-csv manifests/ecn_links.csv
@@ -45,7 +56,8 @@ python scripts/download_manifest.py \
 python scripts/export_frames.py \
   --input-dir data/raw \
   --output-dir data/frames \
-  --step 5
+  --step 5 \
+  --backend imageio
 
 echo "Done. Key outputs:"
 echo "  manifests/ecn_highspeed_links.csv"
