@@ -14,8 +14,10 @@ This folder gives you a reproducible Phase 1 workflow for:
 - `scripts/extract_ecn_links.py`: builds the URL manifest.
 - `scripts/download_manifest.py`: downloads all URLs from the manifest.
 - `scripts/export_frames.py`: exports frames from downloaded videos.
+- `scripts/analyze_spray_geometry.py`: computes penetration/cone/area metrics from frames.
 - `data/raw/`: downloaded files.
 - `data/frames/`: exported frame images.
+- `results/geometry/`: analysis CSV outputs.
 
 ## 1) Windows Local (PowerShell)
 
@@ -115,12 +117,26 @@ Resume only frame export (if download already finished):
 sbatch scripts/run_export_only_gpu_cpu24.slurm
 ```
 
+Run geometry analysis from existing frames:
+
+```bash
+sbatch scripts/run_geometry_analysis_gpu_cpu24.slurm
+```
+
 Check logs:
 
 ```bash
 ls -lah logs
 tail -n 100 logs/phase1_<jobid>.out
 tail -n 100 logs/phase1_<jobid>.err
+```
+
+Analysis outputs:
+
+```bash
+ls -lah results/geometry
+head -n 5 results/geometry/video_summary.csv
+head -n 5 results/geometry/frame_metrics.csv
 ```
 
 Transfer example from Windows (PowerShell + OpenSSH):
